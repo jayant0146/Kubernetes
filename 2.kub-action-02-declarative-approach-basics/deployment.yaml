@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: second-app-deployment
+spec:
+  replicas: 1  #(replica of the Containers within the pod)
+  selector: #(within matchlabels the key value pairs should completely match with labels of the Pod Object)
+    matchLabels:
+      app: second-app
+      tier: backend    
+      
+  template:  # templates are the pods, so metadata is made for the new object
+   #(Since templates are already pods, so no need to mention the kind, its pod by default)
+    metadata: 
+      labels:  # within this label field, name of the keys value pairs are completely upto you
+        app: second-app
+        tier: backend
+    spec: 
+      containers:   # Here now add different containers with diff dash
+        - name: second-node
+          image: jayant046/first-k8s-image:2 #(images in the dockerhub)
+          ports:
+            - containerPort: 8080 
+        # - name: ...
+        #   image: ...
+
+
+# Now run this file with the command: kubectl apply -f=deployment.yaml
+# To delete the file: kubectl delete -f=deployment.yaml

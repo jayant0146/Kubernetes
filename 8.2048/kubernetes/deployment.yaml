@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: game-app
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: game   
+      
+  template:  
+    metadata: 
+      labels:  
+        app: game
+
+    spec: 
+      containers:  
+        - name: game-container
+          image: jayant046/2048-game:latest
+          ports:
+            - containerPort: 80 

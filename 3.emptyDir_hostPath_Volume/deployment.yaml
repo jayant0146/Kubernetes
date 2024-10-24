@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: story-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: story
+  template:
+    metadata:
+      labels:
+        app: story
+    spec:
+      containers:
+        - name: story-container
+          image: jayant046/kub-first-app:1
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+      # For emptyDir
+        # - name: story-volume
+        #   emptyDir: {}
+      
+      # For hostPath
+        - name: story-volume
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-host
+spec:
+  volumeName: host-pv #(Name of the volume to be claimed)
+  accessModes:
+    -ReadWriteOnce  #(Can be multiple and therefore in list)
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi #(Should be less than 1Gi, as defined max in the perisstent volume)
